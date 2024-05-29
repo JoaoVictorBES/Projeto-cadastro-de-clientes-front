@@ -21,14 +21,18 @@ export class PrincipalComponent {
   clientes:Cliente[] = [];
 
   //Declarando o service para utilizar os métodos dele dentro dessa classe
-  constructor(private servico:ClienteService){
+  constructor(private servico:ClienteService){}
+
+  // Método para selecionar os clientes
+  selecionar():void{
     this.servico.selecionar()
     .subscribe(retorno => this.clientes = retorno)
   }
 
-  // Método para selecionar os clientes
-  selecionar():void{
-    
-  }
+  // Método de inicialização(){
+    ngOnInit(){
+      this.servico.selecionar()
+    }
+  
 
 }
