@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PrincipalComponent } from "./principal/principal.component";

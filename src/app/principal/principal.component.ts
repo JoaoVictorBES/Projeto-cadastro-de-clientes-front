@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Cliente } from '../modelo/Cliente';
 import { ClienteService } from '../servico/cliente.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-principal',
@@ -13,6 +14,9 @@ import { ClienteService } from '../servico/cliente.service';
   styleUrl: './principal.component.css'
 })
 export class PrincipalComponent {
+
+  //Objeto tipo cliente
+  cliente = new Cliente();
 
   //Variável para visibilade dos botões
   btnCadastro:boolean = true;
@@ -33,6 +37,6 @@ export class PrincipalComponent {
     ngOnInit(){
       this.servico.selecionar()
     }
-  
+
 
 }
