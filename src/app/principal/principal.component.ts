@@ -61,17 +61,73 @@ export class PrincipalComponent {
     this.cliente = this.clientes [posicao];
 
     //visibilade dos botoes
-    this.btnCadastro =false;
+    this.btnCadastro = false;
 
     //visibilidade da tabela
     this.tabela = false;
 
   }
 
+  //Método para editar clientes
+  editar(): void{
+    this.servico.editar(this.cliente)
+    .subscribe(retorno => {
+
+      //Obter posiçao do vetor onde está o cliente
+      let posicao = this.clientes.findIndex(obj => {
+        return obj.codigo == retorno.codigo;
+      });
+
+      //Alterar os dados do cliente no vetor
+      this.clientes[posicao] = retorno;
+
+      //Limpar formulário
+      this.cliente = new Cliente();
+
+      // Visibilidade dos botoes
+      this.btnCadastro = true;
+
+      // Visibilidade da tabela
+      this.tabela = true;
+
+      //Mensagem
+      alert('Cliente alterado com sucesso!');
+
+    })
+  }
+
+  // Método para remover clientes
+  deletar(): void{
+    this.servico.remover (this.cliente.codigo)
+    .subscribe(retorno => {
+
+      //Obter posiçao do vetor onde está o cliente
+      let posicao = this.clientes.findIndex(obj => {
+        return obj.codigo == this.cliente.codigo;
+      });
+
+      //Remover cliente do vetor
+      this.clientes.splice(posicao, 1)
+
+      //Limpar formulário
+      this.cliente = new Cliente();
+
+      // Visibilidade dos botoes
+      this.btnCadastro = true;
+
+      // Visibilidade da tabela
+      this.tabela = true;
+
+      //Mensagem
+      alert('Cliente removido com sucesso!');
+
+    })
+  }
+
   // Método de inicialização(){
-    ngOnInit(){
-      this.selecionar()
-    }
+  ngOnInit(){
+    this.selecionar()
+  }
 
 
 }
